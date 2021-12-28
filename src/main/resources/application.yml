@@ -49,3 +49,4 @@ secure:
       - /admin/info
       - /admin/logout
       - /doc.html
+      - /mq/**
