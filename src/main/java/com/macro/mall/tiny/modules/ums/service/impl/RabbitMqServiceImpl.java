@@ -77,10 +77,32 @@ public class RabbitMqServiceImpl implements RabbitMqService {
         map.put("messageData",messageData);
         map.put("createTime",createTime);
         rabbitTemplate.convertAndSend("act_delay_exchange", "act_delay_routing_key",
-                JSON.toJSONString(map) + "===>" + value,message -> {
+                JSON.toJSONString(map) + "延时5秒 ===>" + value,message -> {
             message.getMessageProperties().setHeader("x-delay",5000);
             return message;
         });
+        return "ok";
+    }
+
+    /**
+     * 插件方式
+     * @param value
+     * @return
+     */
+    @Override
+    public String sendDelaPlug2(String value) {
+        String messageId =UUID.randomUUID().toString().replaceAll("-","");
+        String messageData = "test message, hello!";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String,Object> map=new HashMap<>();
+        map.put("messageId",messageId);
+        map.put("messageData",messageData);
+        map.put("createTime",createTime);
+        rabbitTemplate.convertAndSend("act_delay_exchange", "act_delay_routing_key",
+                JSON.toJSONString(map) + "延时10秒 ===>" + value,message -> {
+                    message.getMessageProperties().setHeader("x-delay",10000);
+                    return message;
+                });
         return "ok";
     }
 }

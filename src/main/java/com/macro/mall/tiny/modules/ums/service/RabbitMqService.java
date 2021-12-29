@@ -26,4 +26,11 @@ public interface RabbitMqService {
      * @return
      */
     String sendDelaPlug(String value);
+
+    /**
+     * 插件方式
+     * @param value
+     * @return
+     */
+    String sendDelaPlug2(String value);
 }

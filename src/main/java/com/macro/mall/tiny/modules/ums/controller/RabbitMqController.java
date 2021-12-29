@@ -36,10 +36,16 @@ public class RabbitMqController {
         return CommonResult.success(rabbitMqService.sendDela(value));
     }
 
-    @ApiOperation(value = "插件延时发送消息")
+    @ApiOperation(value = "插件延时发送消息5秒")
     @RequestMapping(value = "/sendDelaPlug", method = RequestMethod.POST)
     public CommonResult sendDelaPlug(@RequestParam("value") String value){
         return CommonResult.success(rabbitMqService.sendDelaPlug(value));
+    }
+
+    @ApiOperation(value = "插件延时发送消息10秒")
+    @RequestMapping(value = "/sendDelaPlug2", method = RequestMethod.POST)
+    public CommonResult sendDelaPlug2(@RequestParam("value") String value){
+        return CommonResult.success(rabbitMqService.sendDelaPlug2(value));
     }
 
 }
