@@ -72,6 +72,7 @@ public class RabbitMqConfig {
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(new Jackson2JsonMessageConverter(objectMapper));
         return factory;
+
     }
 
 
