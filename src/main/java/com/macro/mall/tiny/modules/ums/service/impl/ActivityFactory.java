@@ -22,23 +22,14 @@ public class ActivityFactory {
     @Autowired
     private Map<String, ActivityAbstractExecutor> executorMap;
 
-    ///所有的会员服务类实例都存到一个map中。key为会员等级，value为会员的bean名称
-    public static final Map<Integer,String> beanNames = new ConcurrentHashMap<>();
-    static {
-        AgentActivityEnum[] enums = AgentActivityEnum.values();
-        for (AgentActivityEnum e : enums) {
-            beanNames.put(e.getActivityId(),e.getBeanName());
-        }
-    }
-
     public String execute(Integer activityId){
-        // 通过会员等级获取bean名称并
-        String beanName = beanNames.get(activityId);
+        // 通过会员等级获取bean名称
+        String beanName = AgentActivityEnum.getNameByCode(activityId);
         if (null == beanName) {
             log.error("不存在该会员等级:{}",activityId);
             return "不存在该会员等级！";
         }
-        //决定最终走哪个类的执行器
+        //决定最终走哪个类的执行器（通过key获取beam实现）
         ActivityAbstractExecutor executor = executorMap.get(beanName);
         if (executor == null) {
             log.error("无策略实现:{}",beanName);

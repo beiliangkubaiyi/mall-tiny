@@ -26,4 +26,13 @@ public enum AgentActivityEnum {
     public String getDesc() {
         return desc;
     }
+
+    public static String getNameByCode(Integer activityId){
+        for (AgentActivityEnum value : values()){
+            if(value.getActivityId().equals(activityId)){
+                return value.getBeanName();
+            }
+        }
+        return activityId.toString();
+    }
 }
