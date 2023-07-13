@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class RedisSonConfig {
 
     @Bean
-    public RedissonClient getRedissionClient(){
+    public RedissonClient getRedissonClient(){
         // 1. RedisSon
         Config config = new Config();
         //单机版
